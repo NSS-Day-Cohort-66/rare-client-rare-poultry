@@ -8,7 +8,7 @@ export const Register = () => {
   const [firstName, setFirstName] = useState("Admina");
   const [lastName, setLastName] = useState("Straytor");
   const [bio, setBio] = useState("Bio");
-  const [profileImg, setProfileImg] = useState("Image URL");
+  const [profile_image_url, setProfileImg] = useState("Image URL");
   const existDialog = useRef();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export const Register = () => {
         first_name: firstName,
         last_name: lastName,
         bio,
-        profile_img_url: profileImg,
+        profile_image_url,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export const Register = () => {
             <input
               type="text"
               id="inputProfileImg"
-              value={profileImg}
+              value={profile_image_url}
               onChange={(evt) => setProfileImg(evt.target.value)}
               className="form-control"
               placeholder="ImageUrl"
