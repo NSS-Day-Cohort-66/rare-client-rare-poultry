@@ -6,7 +6,7 @@ export const Authorized = () => {
     return (
       <>
         <NavBar />
-        <main className="p-4">
+        <main className="flex items-center justify-center">
           <Outlet />
         </main>
       </>

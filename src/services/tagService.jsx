@@ -1,4 +1,4 @@
-export const categoryService = () => {
+export const getAllTags = () => {
     const variable = JSON.parse(localStorage.getItem("rare_token"));
     const token = variable.token;
     return fetch("http://localhost:8000/tags", {
