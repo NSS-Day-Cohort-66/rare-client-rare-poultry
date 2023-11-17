@@ -4,6 +4,7 @@ import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
 import App from "../App";
 import { Categories } from "./Categories";
+import { Tags } from "./Tags";
 
 export const ApplicationViews = () => {
   return (
@@ -14,6 +15,7 @@ export const ApplicationViews = () => {
         <Route element={<Authorized />}>
           <Route path="/" element={<App />} />
           <Route path="/categorymanager" element={<Categories />} />
+          <Route path="/tagmanager" element={<Tags />} />
         </Route>
       </Routes>
     </BrowserRouter>

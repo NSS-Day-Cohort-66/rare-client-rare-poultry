@@ -4,10 +4,10 @@ import "./Navbar.css";
 export const NavBar = () => {
   const navigate = useNavigate();
   return (
-    <ul className="navbar pb-10">
+    <ul className="navbar pt-2 pb-20">
       <li className="navbar__item pl-10">
         <NavLink
-          className="text-left underline text-blue-600 hover:text-purple-700"
+          className="btn-navbar"
           to={"/posts"}
         >
           All Posts
@@ -15,7 +15,7 @@ export const NavBar = () => {
       </li>
       <li className="navbar__item">
         <NavLink
-          className="text-left underline text-blue-600 hover:text-purple-700"
+          className="btn-navbar"
           to={"/myposts"}
         >
           My Posts
@@ -23,7 +23,7 @@ export const NavBar = () => {
       </li>
       <li className="navbar__item">
         <NavLink
-          className="text-left underline text-blue-600 hover:text-purple-700"
+          className="btn-navbar"
           to={"/categorymanager"}
         >
           Category Manager
@@ -31,16 +31,16 @@ export const NavBar = () => {
       </li>
       <li className="navbar__item">
         <NavLink
-          className="text-left underline text-blue-600 hover:text-purple-700"
+          className="btn-navbar"
           to={"/tagmanager"}
         >
           Tag Manager
         </NavLink>
       </li>
       {localStorage.getItem("rare_token") !== null ? (
-        <li className="navbar__item">
+        <li className="navbar__item -translate-y-2">
           <button
-            className="underline text-blue-600 hover:text-purple-700"
+            className="btn-delete"
             onClick={() => {
               localStorage.removeItem("rare_token");
               navigate("/login");
