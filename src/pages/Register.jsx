@@ -7,6 +7,9 @@ export const Register = () => {
   const [password, setPassword] = useState("straytor");
   const [firstName, setFirstName] = useState("Admina");
   const [lastName, setLastName] = useState("Straytor");
+  const [bio, setBio] = useState("Bio");
+  const [profile_image_url, setProfileImg] = useState("Image URL");
+  const [rare_username, setRareUsername] = useState("");
   const existDialog = useRef();
   const navigate = useNavigate();
 
@@ -19,6 +22,9 @@ export const Register = () => {
         password,
         first_name: firstName,
         last_name: lastName,
+        bio,
+        profile_image_url,
+        rare_username,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -99,6 +105,39 @@ export const Register = () => {
               onChange={(evt) => setPassword(evt.target.value)}
               className="form-control"
               placeholder="Password"
+            />
+          </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="inputBio"> Bio </label>
+            <input
+              type="text"
+              id="inputBio"
+              value={bio}
+              onChange={(evt) => setBio(evt.target.value)}
+              className="form-control"
+              placeholder="Bio"
+            />
+          </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="inputProfileImg"> ImageUrl </label>
+            <input
+              type="text"
+              id="inputProfileImg"
+              value={profile_image_url}
+              onChange={(evt) => setProfileImg(evt.target.value)}
+              className="form-control"
+              placeholder="ImageUrl"
+            />
+          </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="rare_username"> Username </label>
+            <input
+              type="text"
+              id="inputUsername"
+              value={rare_username}
+              onChange={(evt) => setRareUsername(evt.target.value)}
+              className="form-control"
+              placeholder="username"
             />
           </fieldset>
           <fieldset>
