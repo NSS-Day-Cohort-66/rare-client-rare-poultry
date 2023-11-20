@@ -40,7 +40,7 @@ export const Tags = () => {
       <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-start translate-x-2 rounded-t-lg">
         Tags
       </div>
-      <div className="__tags-list-form-container__ flex p">
+      <div className="__tags-list-form-container__ flex">
         <div className="__tags-list__ flex flex-wrap gap-4 bg-cyan-950/60 border border-white/40 py-20 items-center justify-center rounded-lg p-10">
           {allTags.map((tag) => {
             return (
