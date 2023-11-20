@@ -8,3 +8,5 @@ export const getAllUsers = () => {
     },
   }).then((res) => res.json());
 };
+
+export const getUserById = () => {};

@@ -8,6 +8,7 @@ import { Tags } from "./Tags";
 import { Posts } from "./Posts";
 import { Comments } from "./Comments";
 import { Users } from "./Users";
+import { UserDetails } from "./UserDetails";
 
 export const ApplicationViews = () => {
   return (
@@ -22,6 +23,7 @@ export const ApplicationViews = () => {
           <Route path="/tagmanager" element={<Tags />} />
           <Route path="/comments" element={<Comments />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/users/:userId" component={<UserDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
