@@ -9,17 +9,28 @@ export const Users = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Users</h1>
-      <ul>
+    <div className="__users-container__ flex flex-col w-7/12">
+      <h1 className="__users-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center rounded-t-lg">
+        Users
+      </h1>
+      <div className="__users-list__ bg-cyan-950/60 border border-white/40 py-20 rounded-lg">
         {allUsers.map((user) => (
-          <li key={user.user.email}>
-            <h3>{user.user.full_name}</h3>
-            <p>Email: {user.user.email}</p>
-            <p>Is Staff: {user.user.is_staff}</p>
-          </li>
+          <div
+            key={user.rare_username}
+            className="__users-item__ bg-cyan-500 py-4 px-6 text-cyan-950 mb-4 rounded-md flex flex-col"
+          >
+            <div className="flex justify-between items-center mb-2">
+              <h3 className="text-lg font-semibold">
+                User: {user.rare_username}
+              </h3>
+              <span className="text-sm">Staff: {user.user.is_staff}</span>
+            </div>
+            <p className="text-sm">
+              <strong>Name:</strong> {user.user.full_name}
+            </p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
