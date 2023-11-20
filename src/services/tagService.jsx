@@ -8,8 +8,3 @@ export const getAllTags = () => {
       },
     }).then((res) => res.json());
   };
-  
-
-export const addTag = (label) => {
-    
-}
