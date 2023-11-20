@@ -19,8 +19,8 @@ export const Posts = () => {
                 {allPosts.map(post => (
                     <li key={post.id}>
                         <h2>{post.title}</h2>
-                        <p>Author:{post.authorName}</p>
-                        <p>Category:{post.categoryName}</p>
+                        <p>Author:{post.author.author_name}</p>
+                        <p>Category:{post.category_name}</p>
                     </li>
                 ))}
             </ul>
