@@ -8,4 +8,3 @@ export const getAllTags = () => {
       },
     }).then((res) => res.json());
   };
-  
