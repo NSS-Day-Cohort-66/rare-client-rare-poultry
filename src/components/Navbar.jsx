@@ -6,35 +6,28 @@ export const NavBar = () => {
   return (
     <ul className="navbar pt-2 pb-20">
       <li className="navbar__item pl-10">
-        <NavLink
-          className="btn-navbar"
-          to={"/posts"}
-        >
+        <NavLink className="btn-navbar" to={"/posts"}>
           All Posts
         </NavLink>
       </li>
       <li className="navbar__item">
-        <NavLink
-          className="btn-navbar"
-          to={"/myposts"}
-        >
+        <NavLink className="btn-navbar" to={"/myposts"}>
           My Posts
         </NavLink>
       </li>
       <li className="navbar__item">
-        <NavLink
-          className="btn-navbar"
-          to={"/categorymanager"}
-        >
+        <NavLink className="btn-navbar" to={"/categorymanager"}>
           Category Manager
         </NavLink>
       </li>
       <li className="navbar__item">
-        <NavLink
-          className="btn-navbar"
-          to={"/tagmanager"}
-        >
+        <NavLink className="btn-navbar" to={"/tagmanager"}>
           Tag Manager
+        </NavLink>
+      </li>
+      <li className="navbar__item">
+        <NavLink className="btn-navbar" to={"/users"}>
+          User Profiles
         </NavLink>
       </li>
       {localStorage.getItem("rare_token") !== null ? (

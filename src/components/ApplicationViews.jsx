@@ -7,6 +7,7 @@ import { Categories } from "./Categories";
 import { Tags } from "./Tags";
 import { Posts } from "./Posts";
 import { Comments } from "./Comments";
+import { Users } from "./Users";
 
 export const ApplicationViews = () => {
   return (
@@ -20,6 +21,7 @@ export const ApplicationViews = () => {
           <Route path="/categorymanager" element={<Categories />} />
           <Route path="/tagmanager" element={<Tags />} />
           <Route path="/comments" element={<Comments />} />
+          <Route path="/users" element={<Users />} />
         </Route>
       </Routes>
     </BrowserRouter>

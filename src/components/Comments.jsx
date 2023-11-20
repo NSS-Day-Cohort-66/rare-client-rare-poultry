@@ -17,11 +17,11 @@ export const Comments = () => {
         <div>
           {post.comments?.map((obj) => {
             return (
-              <>
-                <div key={obj.id}>{obj.content}</div>
+              <div key={obj.id}>
+                <div>{obj.content}</div>
                 <div>{obj.created_on}</div>
-                <div>{obj.comments.author.user.author_name}</div>
-              </>
+                <div>{obj.author.user.author_name}</div>
+              </div>
             );
           })}
         </div>
