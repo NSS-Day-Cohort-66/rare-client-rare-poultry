@@ -9,6 +9,7 @@ export const Register = () => {
   const [lastName, setLastName] = useState("Straytor");
   const [bio, setBio] = useState("Bio");
   const [profile_image_url, setProfileImg] = useState("Image URL");
+  const [rare_username, setRareUsername] = useState("");
   const existDialog = useRef();
   const navigate = useNavigate();
 
@@ -23,6 +24,7 @@ export const Register = () => {
         last_name: lastName,
         bio,
         profile_image_url,
+        rare_username,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -125,6 +127,17 @@ export const Register = () => {
               onChange={(evt) => setProfileImg(evt.target.value)}
               className="form-control"
               placeholder="ImageUrl"
+            />
+          </fieldset>
+          <fieldset className="mb-4">
+            <label htmlFor="rare_username"> Username </label>
+            <input
+              type="text"
+              id="inputUsername"
+              value={rare_username}
+              onChange={(evt) => setRareUsername(evt.target.value)}
+              className="form-control"
+              placeholder="username"
             />
           </fieldset>
           <fieldset>
