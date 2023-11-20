@@ -1,22 +1,28 @@
 import { useEffect, useState } from "react";
-import { commentsService } from "../services/commentsService";
+import { postServiceById } from "../services/postService";
 
-export const Categories = () => {
-  const [comments, setComments] = useState([]);
+export const Comments = () => {
+  const [post, setPost] = useState([]);
 
   useEffect(() => {
-    commentsService().then((obj) => {
-      setComments(obj);
+    postServiceById(1).then((obj) => {
+      setPost(obj);
     });
   }, []);
 
   return (
     <>
       <div>
-        <label className="text-xl underline font-bold">Comments</label>
+        <label className="text-xl underline font-bold">{post.title}</label>
         <div>
-          {comments.map((obj) => {
-            return <div key={obj.id}>{obj.content}</div>;
+          {post.comments?.map((obj) => {
+            return (
+              <>
+                <div key={obj.id}>{obj.content}</div>
+                <div>{obj.created_on}</div>
+                <div>{obj.comments.author.user.author_name}</div>
+              </>
+            );
           })}
         </div>
       </div>

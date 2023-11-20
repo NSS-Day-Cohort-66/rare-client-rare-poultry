@@ -5,7 +5,8 @@ import { Register } from "../pages/Register";
 import App from "../App";
 import { Categories } from "./Categories";
 import { Tags } from "./Tags";
-import { Posts } from "./Posts"
+import { Posts } from "./Posts";
+import { Comments } from "./Comments";
 
 export const ApplicationViews = () => {
   return (
@@ -18,6 +19,7 @@ export const ApplicationViews = () => {
           <Route path="/posts" element={<Posts />} />
           <Route path="/categorymanager" element={<Categories />} />
           <Route path="/tagmanager" element={<Tags />} />
+          <Route path="/comments" element={<Comments />} />
         </Route>
       </Routes>
     </BrowserRouter>
