@@ -24,12 +24,15 @@ export const PostDetails = () => {
     }
 
     return (
-        <div>
-            <h2>{post.title}</h2>
-            {post.image_url && <img src={post.image_url} />}
-            <p>{post.content}</p>
-            <p>Published on: {post.publication_date}</p>
-            <p>Author: {post.author.author_name}</p>
+        <div className="__post-details-container__ flex flex-col w-7/12">
+        <label className="__post-details-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center rounded-t-lg">Post Details</label>
+        <div className="__post-details-list__ bg-cyan-950/60 border border-white/40 py-20 rounded-lg self-center">
+            <h2 className="text-xl font-bold mb-4 text-teal-800">{post.title}</h2>
+            {post.image_url && <img src={post.image_url} className="w-full h-auto mb-4 rounded" />}
+            <p className="text-gray-700 text-lg mb-2">{post.content}</p>
+            <p className="text-gray-600">Published on: {post.publication_date}</p>
+            <p className="text-gray-600">Author: {post.user.user.author_name}</p>
+        </div>
         </div>
         )
     }
