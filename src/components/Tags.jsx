@@ -11,7 +11,9 @@ export const Tags = () => {
     },
   ]);
   const [newTag, setNewTag] = useState({ label: "" });
-  const existDialog = useRef();
+  const editModal = useRef();
+  const deleteModal = useRef();
+
   useEffect(() => {
     getAllTags().then((tagsArray) => {
       setAllTags(tagsArray);
@@ -39,13 +41,33 @@ export const Tags = () => {
 
   return (
     <div className="__tags-container__ flex flex-col w-9/12 items-center">
-      <dialog className="__edit-modal__" ref={existDialog}>
-        <div>Modal Test</div>
-        <button onClick={() => existDialog.current.close()}>Close Modal</button>
+      <dialog
+        className="__edit-modal__ bg-sky-400/90 p-10 font-bold"
+        ref={editModal}
+      >
+        <div>Edit Modal</div>
+        <button
+          className="btn-delete"
+          onClick={() => editModal.current.close()}
+        >
+          Close Modal
+        </button>
       </dialog>
       <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center translate-x-2 rounded-t-lg">
         Tags
       </div>
+      <dialog
+        className="__delete-modal__ bg-red-400/90 p-10 font-bold"
+        ref={deleteModal}
+      >
+        <div>Delete Modal</div>
+        <button
+          className="btn-delete"
+          onClick={() => deleteModal.current.close()}
+        >
+          Close Modal
+        </button>
+      </dialog>
       <div className="__tags-list-form-container__ flex h-[700px]">
         <div className="__tags-list__ flex flex-col flex-1 flex-wrap gap-2 bg-cyan-950/60 border border-white/40 items-center rounded-lg p-10">
           {allTags.map((tag) => {
@@ -56,12 +78,15 @@ export const Tags = () => {
               >
                 <div>
                   <button
-                    onClick={() => existDialog.current.showModal()}
+                    onClick={() => editModal.current.showModal()}
                     className="btn-edit"
                   >
                     <img src={editButton} />
                   </button>
-                  <button className="btn-delete">
+                  <button
+                    className="btn-delete"
+                    onClick={() => deleteModal.current.showModal()}
+                  >
                     <img src={deleteButton} />
                   </button>
                 </div>
