@@ -24,8 +24,8 @@ export const Users = () => {
           <div
             key={user.rare_username}
             className="__users-item__ bg-cyan-500 py-4 px-6 text-cyan-950 mb-4 rounded-md flex flex-col"
-            onClick={() => handleUserClick(user.id)} // Pass user id when clicked
-            style={{ cursor: "pointer" }} // Add pointer cursor for better UX
+            onClick={() => handleUserClick(user.id)}
+            style={{ cursor: "pointer" }}
           >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-lg font-semibold">

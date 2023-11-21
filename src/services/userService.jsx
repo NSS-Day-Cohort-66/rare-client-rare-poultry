@@ -9,7 +9,7 @@ export const getAllUsers = () => {
   }).then((res) => res.json());
 };
 
-export const getUserById = ({ userId }) => {
+export const getUserById = (userId) => {
   const variable = JSON.parse(localStorage.getItem("rare_token"));
   const token = variable.token;
   return fetch(`http://localhost:8000/users/${userId}`, {
