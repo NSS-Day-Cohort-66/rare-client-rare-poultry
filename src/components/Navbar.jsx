@@ -4,7 +4,7 @@ import "./Navbar.css";
 export const NavBar = () => {
   const navigate = useNavigate();
   return (
-    <ul className="navbar pt-2 pb-20">
+    <ul className="navbar pt-2 pb-6">
       <li className="navbar__item pl-10">
         <NavLink className="btn-navbar" to={"/posts"}>
           All Posts
