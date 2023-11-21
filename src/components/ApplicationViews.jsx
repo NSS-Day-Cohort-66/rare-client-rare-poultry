@@ -10,6 +10,7 @@ import { PostDetails } from "./PostDetails";
 import { Comments } from "./Comments";
 import { Users } from "./Users";
 import { UserDetails } from "./UserDetails";
+import { UserPosts } from "./UserPosts";
 
 export const ApplicationViews = () => {
   return (
@@ -19,7 +20,7 @@ export const ApplicationViews = () => {
         <Route path="/register" element={<Register />} />
         <Route element={<Authorized />}>
           <Route path="/" element={<App />} />
-          <Route path="myposts" element={<>Hello!</>} />
+          <Route path="myposts" element={<UserPosts />} />
           <Route path="posts" element={<Posts />} />
           <Route path="posts/:postId" element={<PostDetails />} />
           <Route path="categorymanager" element={<Categories />} />
