@@ -22,6 +22,7 @@ export const ApplicationViews = () => {
           <Route path="/tagmanager" element={<Tags />} />
           <Route path="/comments" element={<Comments />} />
           <Route path="/users" element={<Users />} />
+          <Route path="/myposts" element={<>Hello!</>} />
         </Route>
       </Routes>
     </BrowserRouter>
