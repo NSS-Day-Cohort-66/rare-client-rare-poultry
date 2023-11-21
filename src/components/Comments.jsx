@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { postServiceById } from "../services/postService";
+import { useParams } from "react-router-dom";
 
 export const Comments = () => {
   const [post, setPost] = useState([]);
+  const { postId } = useParams();
 
   useEffect(() => {
-    postServiceById(1).then((obj) => {
+    postServiceById(postId).then((obj) => {
       setPost(obj);
     });
   }, []);
+
+  if (post.comments?.length === 0) {
+    return <div>No comments to show!</div>;
+  }
 
   return (
     <>
