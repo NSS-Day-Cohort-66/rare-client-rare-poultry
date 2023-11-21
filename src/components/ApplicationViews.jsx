@@ -5,8 +5,10 @@ import { Register } from "../pages/Register";
 import App from "../App";
 import { Categories } from "./Categories";
 import { Tags } from "./Tags";
-import { Posts } from "./Posts"
+import { Posts } from "./Posts";
 import { PostDetails } from "./PostDetails";
+import { Comments } from "./Comments";
+import { Users } from "./Users";
 
 export const ApplicationViews = () => {
   return (
@@ -20,6 +22,8 @@ export const ApplicationViews = () => {
           <Route path="/posts/:postId" element={<PostDetails />} />
           <Route path="/categorymanager" element={<Categories />} />
           <Route path="/tagmanager" element={<Tags />} />
+          <Route path="/comments" element={<Comments />} />
+          <Route path="/users" element={<Users />} />
         </Route>
       </Routes>
     </BrowserRouter>
