@@ -23,7 +23,7 @@ export const ApplicationViews = () => {
           <Route path="/tagmanager" element={<Tags />} />
           <Route path="/comments" element={<Comments />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/users/:userId" component={<UserDetails />} />
+          <Route path="/users/:userId" element={<UserDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>

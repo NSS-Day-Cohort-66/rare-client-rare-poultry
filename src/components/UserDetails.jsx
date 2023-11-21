@@ -7,7 +7,11 @@ export const UserDetails = () => {
   const [userDetails, setUserDetails] = useState(null);
 
   useEffect(() => {
-    getUserById(userId).then((data) => setUserDetails(data));
+    getUserById({ id: userId })
+      .then((data) => setUserDetails(data))
+      .catch((error) => {
+        console.error("Error fetching user by ID:", error);
+      });
   }, [userId]);
 
   if (!userDetails) {
@@ -19,7 +23,6 @@ export const UserDetails = () => {
       <h1>{userDetails.user.full_name}</h1>
       <p>Email: {userDetails.user.email}</p>
       <p>Is Staff: {userDetails.user.is_staff}</p>
-      {/* Add more details as needed */}
     </div>
   );
 };
