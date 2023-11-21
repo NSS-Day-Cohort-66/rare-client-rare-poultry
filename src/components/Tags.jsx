@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getAllTags } from "../services/tagService";
 
 export const Tags = () => {
@@ -9,7 +9,7 @@ export const Tags = () => {
     },
   ]);
   const [newTag, setNewTag] = useState({ label: "" });
-
+  const existDialog = useRef();
   useEffect(() => {
     getAllTags().then((tagsArray) => {
       setAllTags(tagsArray);
@@ -37,6 +37,10 @@ export const Tags = () => {
 
   return (
     <div className="__tags-container__ flex flex-col w-9/12 items-center">
+      <dialog className="__edit-modal__" ref={existDialog}>
+        <div>Modal Test</div>
+        <button onClick={() => existDialog.current.close()}>Close Modal</button>
+      </dialog>
       <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center translate-x-2 rounded-t-lg">
         Tags
       </div>
@@ -49,7 +53,12 @@ export const Tags = () => {
                 key={tag.id}
               >
                 <div>
-                  <button className="btn-edit">Edit</button>
+                  <button
+                    onClick={() => existDialog.current.showModal()}
+                    className="btn-edit"
+                  >
+                    Edit
+                  </button>
                   <button className="btn-delete">Delete</button>
                 </div>
 
