@@ -11,6 +11,7 @@ import { Comments } from "./Comments";
 import { Users } from "./Users";
 import { UserDetails } from "./UserDetails";
 import { UserPosts } from "./UserPosts";
+import { CreatePost } from "./CreatePost";
 
 export const ApplicationViews = () => {
   return (
@@ -21,6 +22,7 @@ export const ApplicationViews = () => {
         <Route element={<Authorized />}>
           <Route path="/" element={<App />} />
           <Route path="myposts" element={<UserPosts />} />
+          <Route path="createpost" element={<CreatePost />} />
           <Route path="posts" element={<Posts />} />
           <Route path="posts/:postId" element={<PostDetails />} />
           <Route path="categorymanager" element={<Categories />} />
