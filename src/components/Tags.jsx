@@ -106,7 +106,7 @@ export const Tags = () => {
             <fieldset>
               <input
                 type="text"
-                className="__tag-label-input__"
+                className="__tag-label-input__ input-text"
                 value={newTag.label}
                 placeholder="Add a tag..."
                 onChange={(event) => {

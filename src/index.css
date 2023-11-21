@@ -15,6 +15,9 @@
   .bg-fade-b {
     @apply bg-gradient-to-r from-slate-900/0 via-slate-900/80 to-slate-900/0;
   }
+  .input-text {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none
+  }
 }
 
 html {
