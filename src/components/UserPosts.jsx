@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { postService } from "../services/postService";
 
 export const UserPosts = () => {
-  const [user, setUser] = useState([]);
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
 
@@ -10,20 +9,21 @@ export const UserPosts = () => {
     postService().then((obj) => {
       setPosts(obj);
     });
-    const variable = JSON.parse(localStorage.getItem("honey_user"));
-    const userId = variable.id;
-    setUser(userId);
   }, []);
 
   useEffect(() => {
     let filteredPosts = [];
     posts.map((obj) => {
-      if (obj.user.id === user) {
+      if (obj.is_owner === true) {
         filteredPosts.push(obj);
       }
     });
     setUserPosts(filteredPosts);
-  }, [posts, user]);
+  }, [posts]);
+
+  if (userPosts == []) {
+    return <div>No Posts to Show!</div>;
+  }
 
   return (
     <div>
