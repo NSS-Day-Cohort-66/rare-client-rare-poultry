@@ -27,7 +27,7 @@ export const ApplicationViews = () => {
           <Route path="posts/:postId" element={<PostDetails />} />
           <Route path="categorymanager" element={<Categories />} />
           <Route path="tagmanager" element={<Tags />} />
-          <Route path="comments" element={<Comments />} />
+          <Route path="posts/:postId/comments" element={<Comments />} />
           <Route path="users" element={<Users />} />
           <Route path="users/:userId" element={<UserDetails />} />
         </Route>
