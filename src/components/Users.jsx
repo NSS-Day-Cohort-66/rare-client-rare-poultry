@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAllUsers } from "../services/userService";
 
 export const Users = () => {
   const [allUsers, setAllUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllUsers().then((data) => setAllUsers(data));
   }, []);
+
+  const handleUserClick = (userId) => {
+    navigate(`/users/${userId}`);
+  };
 
   return (
     <div className="__users-container__ flex flex-col w-7/12">
@@ -18,6 +24,8 @@ export const Users = () => {
           <div
             key={user.rare_username}
             className="__users-item__ bg-cyan-500 py-4 px-6 text-cyan-950 mb-4 rounded-md flex flex-col"
+            onClick={() => handleUserClick(user.id)}
+            style={{ cursor: "pointer" }}
           >
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-lg font-semibold">
