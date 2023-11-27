@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { categoryService } from "../services/categoryService";
+import { useNavigate } from "react-router-dom";
 
 export const CreatePost = () => {
   const [category, setCategory] = useState([]);
@@ -9,6 +10,8 @@ export const CreatePost = () => {
     content: "",
     category: 0,
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     categoryService().then((catArray) => {
@@ -35,6 +38,7 @@ export const CreatePost = () => {
       },
       body: JSON.stringify(newPost),
     });
+    navigate("/posts");
   };
 
   return (
@@ -95,7 +99,7 @@ export const CreatePost = () => {
           })}
         </select>
       </fieldset>
-      <button type="submit">Submit</button>
+      <button type="submit">Publish</button>
     </form>
   );
 };
