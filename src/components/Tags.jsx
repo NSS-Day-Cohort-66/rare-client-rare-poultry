@@ -88,11 +88,11 @@ export const Tags = () => {
       </div>
       {/* Edit Modal Designated Below*/}
       <dialog
-        className="__edit-modal__ bg-sky-400/90 p-10 font-bold rounded border border-white"
+        className="__edit-modal__ bg-sky-400/90 p-10 rounded border border-white"
         ref={editModal}
       >
         <form className="flex flex-col gap-4 items-center">
-          <div>Edit this tag</div>
+          <div className="font-bold text-lg">Edit this tag</div>
           <fieldset>
             <input
               className="input-text"

@@ -70,11 +70,11 @@ export const Categories = () => {
       </div>
       {/* Edit Modal Designated Below*/}
       <dialog
-        className="__edit-modal__ bg-sky-400/90 p-10 font-bold"
+        className="__edit-modal__ bg-sky-400/90 p-10 rounded border border-white"
         ref={editModal}
       >
-        <div>Edit Category</div>
-        <form>
+        <form className="flex flex-col gap-4 items-center">
+          <div className="font-bold text-lg">Edit this category</div>
           <fieldset>
             <input
               className="input-text"
@@ -86,20 +86,22 @@ export const Categories = () => {
               }}
             ></input>
           </fieldset>
-          <button
-            className="btn-edit"
-            onClick={(event) => {
-              changeCategory(event, editCategory.id);
-            }}
-          >
-            Ok
-          </button>
-          <button
-            className="btn-delete"
-            onClick={() => editModal.current.close()}
-          >
-            Cancel
-          </button>
+          <div className="__btn-container__ flex gap-4 justify-between">
+            <button
+              className="btn-edit px-6"
+              onClick={(event) => {
+                changeCategory(event, editCategory.id);
+              }}
+            >
+              Ok
+            </button>
+            <button
+              className="btn-delete"
+              onClick={() => editModal.current.close()}
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       </dialog>
       {/* Delete Modal Designated Below*/}
@@ -145,7 +147,7 @@ export const Categories = () => {
                   {category.label}
                 </div>
               </div>
-            )
+            );
           })}
         </div>
         <div className="__category-form-container__ self-center">
