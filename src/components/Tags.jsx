@@ -98,7 +98,7 @@ export const Tags = () => {
           </button>
         </form>
       </dialog>
-      {/* Delete Modal Designated Below*/}
+      {/* Edit Modal Designated Below*/}
       <dialog
         className="__delete-modal__ bg-red-400/90 p-10 font-bold"
         ref={deleteModal}
