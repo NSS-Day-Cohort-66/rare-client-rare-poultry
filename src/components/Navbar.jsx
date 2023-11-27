@@ -16,6 +16,11 @@ export const NavBar = () => {
         </NavLink>
       </li>
       <li className="navbar__item">
+        <NavLink className="btn-navbar" to={"/createpost"}>
+          Create Post
+        </NavLink>
+      </li>
+      <li className="navbar__item">
         <NavLink className="btn-navbar" to={"/categorymanager"}>
           Category Manager
         </NavLink>
