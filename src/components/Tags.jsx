@@ -65,7 +65,7 @@ export const Tags = () => {
 
   return (
     <div className="__tags-container__ flex flex-col w-9/12 items-center">
-      <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center translate-x-2 rounded-t-lg">
+      <div className="__tags-header__ text-3xl font-bold bg-sky-800 text-white py-2 px-12 mb-4 self-center rounded-lg border border-white">
         Tags
       </div>
       {/* Edit Modal Designated Below*/}
@@ -111,12 +111,12 @@ export const Tags = () => {
           Close Modal
         </button>
       </dialog>
-      <div className="__tags-list-form-container__ flex h-[700px]">
-        <div className="__tags-list__ flex flex-col flex-1 flex-wrap gap-2 bg-cyan-950/60 border border-white/40 items-center rounded-lg p-10">
+      <div className="__tags-list-form-container__ flex h-[684px]">
+        <div className="__tags-list__ flex flex-col flex-1 flex-wrap gap-2 bg-sky-950/60 border border-white/40 items-center rounded-lg p-10">
           {allTags.map((tag) => {
             return (
               <div
-                className="__tags-item-container__ bg-cyan-500/40 py-1 px-2 text-cyan-950 flex items-center justify-between w-[256px] rounded"
+                className="__tags-item-container__ bg-sky-500/40 py-1 px-2 text-cyan-950 flex items-center justify-between w-[256px] rounded"
                 key={tag.id}
               >
                 <div>

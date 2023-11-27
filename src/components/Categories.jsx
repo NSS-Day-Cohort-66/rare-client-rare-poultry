@@ -65,7 +65,7 @@ export const Categories = () => {
 
   return (
     <div className="__categories-container__ flex flex-col w-9/12 items-center">
-      <div className="__categories-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-start translate-x-2 rounded-t-lg">
+      <div className="__categories-header__ text-3xl font-bold bg-cyan-800 text-white py-2 px-12 mb-4 self-center rounded-lg border border-white">
         Categories
       </div>
       {/* Edit Modal Designated Below*/}
@@ -115,7 +115,7 @@ export const Categories = () => {
           Close Modal
         </button>
       </dialog>
-      <div className="__categories-list-form-container__ flex h-[700px]">
+      <div className="__categories-list-form-container__ flex h-[684px]">
         <div className="__categories-list__ flex flex-col flex-1 flex-wrap gap-2 bg-cyan-950/60 border border-white/40 items-center rounded-lg p-10">
           {categories.map((category) => {
             return (
