@@ -40,6 +40,24 @@ export const Tags = () => {
     setNewTag({ label: "" });
   };
 
+  const deleteTag = async (event, id) => {
+    event.preventDefault();
+
+    await fetch(`http://localhost:8000/tags/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${
+          JSON.parse(localStorage.getItem("rare_token")).token
+        }`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const updatedTags = await getAllTags();
+    deleteModal.current.close();
+    setAllTags(updatedTags);
+  };
+
   const changeTag = async (event, id) => {
     event.preventDefault();
     const finalValue = {
@@ -70,46 +88,62 @@ export const Tags = () => {
       </div>
       {/* Edit Modal Designated Below*/}
       <dialog
-        className="__edit-modal__ bg-sky-400/90 p-10 font-bold"
+        className="__edit-modal__ bg-sky-400/90 p-10 rounded border border-white"
         ref={editModal}
       >
-        <div>Edit Tag</div>
-        <form>
+        <form className="flex flex-col gap-4 items-center">
+          <div className="font-bold text-lg">Edit this tag</div>
           <fieldset>
-            <input className="input-text" value={editTag.label} onChange={(event) => {
-              const copy = { ...editTag}
-              copy.label = event.target.value
-              setEditTag(copy)
-            }}></input>
+            <input
+              className="input-text"
+              value={editTag.label}
+              onChange={(event) => {
+                const copy = { ...editTag };
+                copy.label = event.target.value;
+                setEditTag(copy);
+              }}
+            ></input>
           </fieldset>
+          <div className="__btn-container__ flex gap-4 justify-between">
+            <button
+              className="btn-edit px-6"
+              onClick={(event) => {
+                changeTag(event, editTag.id);
+              }}
+            >
+              Ok
+            </button>
+            <button
+              className="btn-delete"
+              onClick={() => editModal.current.close()}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </dialog>
+      {/* Delete Modal Designated Below*/}
+      <dialog
+        className="__delete-modal__ bg-red-400/90 p-10 font-bold rounded border border-white"
+        ref={deleteModal}
+      >
+        <div>Are you sure you want to delete this tag?</div>
+        <div className="__btn-container__ flex justify-around mt-6">
           <button
-            className="btn-edit"
+            className="btn-edit px-6"
             onClick={(event) => {
-              changeTag(event, editTag.id);
+              deleteTag(event, editTag.id);
             }}
           >
             Ok
           </button>
           <button
             className="btn-delete"
-            onClick={() => editModal.current.close()}
+            onClick={() => deleteModal.current.close()}
           >
             Cancel
           </button>
-        </form>
-      </dialog>
-      {/* Edit Modal Designated Below*/}
-      <dialog
-        className="__delete-modal__ bg-red-400/90 p-10 font-bold"
-        ref={deleteModal}
-      >
-        <div>Delete Modal</div>
-        <button
-          className="btn-delete"
-          onClick={() => deleteModal.current.close()}
-        >
-          Close Modal
-        </button>
+        </div>
       </dialog>
       <div className="__tags-list-form-container__ flex h-[684px]">
         <div className="__tags-list__ flex flex-col flex-1 flex-wrap gap-2 bg-sky-950/60 border border-white/40 items-center rounded-lg p-10">
@@ -131,7 +165,10 @@ export const Tags = () => {
                   </button>
                   <button
                     className="btn-delete"
-                    onClick={() => deleteModal.current.showModal()}
+                    onClick={() => {
+                      setEditTag(tag);
+                      deleteModal.current.showModal();
+                    }}
                   >
                     <img src={deleteButton} />
                   </button>
