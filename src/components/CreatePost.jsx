@@ -57,7 +57,7 @@ export const CreatePost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md">
+    <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md border border-white/60">
       <header>
         <div className="text-3xl font-bold text-white my-4">New Post</div>
       </header>
