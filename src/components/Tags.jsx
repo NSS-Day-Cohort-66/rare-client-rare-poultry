@@ -11,6 +11,7 @@ export const Tags = () => {
     },
   ]);
   const [newTag, setNewTag] = useState({ label: "" });
+  const [editTag, setEditTag] = useState({});
   const editModal = useRef();
   const deleteModal = useRef();
 
@@ -39,23 +40,63 @@ export const Tags = () => {
     setNewTag({ label: "" });
   };
 
+  const changeTag = async (event, id) => {
+    event.preventDefault();
+    const finalValue = {
+      label: editTag.label,
+    };
+
+    await fetch(`http://localhost:8000/tags/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Token ${
+          JSON.parse(localStorage.getItem("rare_token")).token
+        }`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(finalValue),
+    });
+
+    const updatedTags = await getAllTags();
+    editModal.current.close();
+    setAllTags(updatedTags);
+    setEditTag({ label: "" });
+  };
+
   return (
     <div className="__tags-container__ flex flex-col w-9/12 items-center">
+      <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center translate-x-2 rounded-t-lg">
+        Tags
+      </div>
       <dialog
         className="__edit-modal__ bg-sky-400/90 p-10 font-bold"
         ref={editModal}
       >
-        <div>Edit Modal</div>
-        <button
-          className="btn-delete"
-          onClick={() => editModal.current.close()}
-        >
-          Close Modal
-        </button>
+        <div>Edit Tag</div>
+        <form>
+          <fieldset>
+            <input className="input-text" value={editTag.label} onChange={(event) => {
+              const copy = { ...editTag}
+              copy.label = event.target.value
+              setEditTag(copy)
+            }}></input>
+          </fieldset>
+          <button
+            className="btn-edit"
+            onClick={(event) => {
+              changeTag(event, editTag.id);
+            }}
+          >
+            Ok
+          </button>
+          <button
+            className="btn-delete"
+            onClick={() => editModal.current.close()}
+          >
+            Cancel
+          </button>
+        </form>
       </dialog>
-      <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center translate-x-2 rounded-t-lg">
-        Tags
-      </div>
       <dialog
         className="__delete-modal__ bg-red-400/90 p-10 font-bold"
         ref={deleteModal}
@@ -78,7 +119,10 @@ export const Tags = () => {
               >
                 <div>
                   <button
-                    onClick={() => editModal.current.showModal()}
+                    onClick={() => {
+                      setEditTag(tag);
+                      editModal.current.showModal();
+                    }}
                     className="btn-edit"
                   >
                     <img src={editButton} />
