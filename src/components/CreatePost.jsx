@@ -6,15 +6,21 @@ import { getAllTags } from "../services/tagService";
 export const CreatePost = () => {
   const [category, setCategory] = useState([]);
   const [tags, setTags] = useState([]);
+  const [chosenTags, updateChosen] = useState(new Set());
   const [newPost, setNewPost] = useState({
     title: "",
     image_url: "",
     content: "",
     category: 0,
-    tags: 0,
   });
 
   const navigate = useNavigate();
+
+  const handleTagChosen = (tag) => {
+    const copy = new Set(chosenTags);
+    copy.has(tag.id) ? copy.delete(tag.id) : copy.add(tag.id);
+    updateChosen(copy);
+  };
 
   useEffect(() => {
     categoryService().then((catArray) => {
@@ -45,7 +51,7 @@ export const CreatePost = () => {
         }`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newPost),
+      body: JSON.stringify({ ...newPost, tags: Array.from(chosenTags) }),
     });
     navigate("/posts");
   };
@@ -115,7 +121,11 @@ export const CreatePost = () => {
         <br />
         {tags.map((t) => (
           <div key={`tags-${t.id}`}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={chosenTags.has(t.id)}
+              onChange={() => handleTagChosen(t)}
+            />
             {t.label}
           </div>
         ))}
