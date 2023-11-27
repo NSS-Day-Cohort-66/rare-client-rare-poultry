@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { categoryService } from "../services/categoryService";
 import { useNavigate } from "react-router-dom";
+import { getAllTags } from "../services/tagService";
 
 export const CreatePost = () => {
   const [category, setCategory] = useState([]);
+  const [tags, setTags] = useState([]);
   const [newPost, setNewPost] = useState({
     title: "",
     image_url: "",
     content: "",
     category: 0,
+    tags: 0,
   });
 
   const navigate = useNavigate();
@@ -16,6 +19,12 @@ export const CreatePost = () => {
   useEffect(() => {
     categoryService().then((catArray) => {
       setCategory(catArray);
+    });
+  }, []);
+
+  useEffect(() => {
+    getAllTags().then((tagArray) => {
+      setTags(tagArray);
     });
   }, []);
 
@@ -98,6 +107,18 @@ export const CreatePost = () => {
             );
           })}
         </select>
+      </fieldset>
+      <fieldset>
+        <label>
+          <strong>Tags</strong>
+        </label>
+        <br />
+        {tags.map((t) => (
+          <div key={`tags-${t.id}`}>
+            <input type="checkbox" />
+            {t.label}
+          </div>
+        ))}
       </fieldset>
       <button type="submit">Publish</button>
     </form>
