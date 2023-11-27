@@ -40,6 +40,24 @@ export const Tags = () => {
     setNewTag({ label: "" });
   };
 
+  const deleteTag = async (event, id) => {
+    event.preventDefault();
+
+    await fetch(`http://localhost:8000/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${
+          JSON.parse(localStorage.getItem("rare_token")).token
+        }`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    const updatedTags = await getAllTags()
+    deleteModal.current.close()
+    setAllTags(updatedTags)
+  }
+
   const changeTag = async (event, id) => {
     event.preventDefault();
     const finalValue = {
