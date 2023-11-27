@@ -13,7 +13,6 @@ export const CreatePost = () => {
   useEffect(() => {
     categoryService().then((catArray) => {
       setCategory(catArray);
-      console.log("categories set!");
     });
   }, []);
 
@@ -23,26 +22,18 @@ export const CreatePost = () => {
     setNewPost(itemCopy);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Submitted:", newPost);
 
-    const newPostItem = {
-      title: newPost.title,
-      image_url: newPost.image_url,
-      content: newPost.content,
-      category: newPost.category,
-    };
-    postPost(newPostItem);
-  };
-
-  const postPost = (post) => {
-    return fetch(`http://localhost:8000/posts`, {
+    await fetch(`http://localhost:8000/posts`, {
       method: "POST",
       headers: {
+        Authorization: `Token ${
+          JSON.parse(localStorage.getItem("rare_token")).token
+        }`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post),
+      body: JSON.stringify(newPost),
     });
   };
 
