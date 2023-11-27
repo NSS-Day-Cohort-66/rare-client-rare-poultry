@@ -68,6 +68,7 @@ export const Tags = () => {
       <div className="__tags-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-center translate-x-2 rounded-t-lg">
         Tags
       </div>
+      {/* Edit Modal Designated Below*/}
       <dialog
         className="__edit-modal__ bg-sky-400/90 p-10 font-bold"
         ref={editModal}
@@ -97,6 +98,7 @@ export const Tags = () => {
           </button>
         </form>
       </dialog>
+      {/* Delete Modal Designated Below*/}
       <dialog
         className="__delete-modal__ bg-red-400/90 p-10 font-bold"
         ref={deleteModal}

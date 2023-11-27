@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { categoryService } from "../services/categoryService";
+import editButton from "../assets/edit.png";
+import deleteButton from "../assets/trash.png";
 
 export const Categories = () => {
   const [categories, setCategories] = useState([
@@ -9,6 +11,9 @@ export const Categories = () => {
     },
   ]);
   const [newCategory, setNewCategory] = useState({ label: "" });
+  const [editCategory, setEditCategory] = useState({})
+  const editModal = useRef();
+  const deleteModal = useRef();
 
   useEffect(() => {
     categoryService().then((categoriesArray) => {
@@ -36,7 +41,7 @@ export const Categories = () => {
   };
 
   return (
-    <div className="__categories-container__ flex flex-col w-7/12">
+    <div className="__categories-container__ flex flex-col w-9/12 items-center">
       <div className="__categories-header__ text-3xl bg-cyan-800 text-white py-2 px-12 self-start translate-x-2 rounded-t-lg">
         Categories
       </div>
