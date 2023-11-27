@@ -41,13 +41,13 @@ export const UserPosts = () => {
               <h2 className="text-xl font-bold mb-2">
                 <Link
                   to={`/posts/${post.id}`}
-                  className="text-teal-800 hover:text-blue-700 underline"
+                  className="text-teal-400 hover:text-blue-700 underline"
                 >
                   {post.title}
                 </Link>
               </h2>
-              <p>Author: {post.user.user.author_name}</p>
-              <p>Category: {post.category_name}</p>
+              <p className="text-white"><span className="font-bold">Author:</span> {post.user.user.author_name}</p>
+              <p className="text-white"><span className="font-bold">Category:</span>{post.category_name}</p>
             </li>
           ))}
         </ul>

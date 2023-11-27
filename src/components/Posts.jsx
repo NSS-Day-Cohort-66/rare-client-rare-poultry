@@ -21,11 +21,11 @@ export const Posts = () => {
                 {allPosts.map(post => (
                     <li key={post.id} className="border-b border-white/40 last:border-b-0 p-4">
                         <h2 className="text-xl font-bold mb-2">
-                            <Link to={`/posts/${post.id}`} className="text-teal-800 hover:text-blue-700 underline"
+                            <Link to={`/posts/${post.id}`} className="text-teal-400 hover:text-blue-700 underline"
                             >{post.title}</Link>
                         </h2>
-                        <p className="text-gray-600">Author: {post.user.user.author_name}</p>
-                        <p className="text-gray-600">Category: {post.category_name}</p>
+                        <p className="text-white"><span className="font-bold">Author:</span> {post.user.user.author_name}</p>
+                        <p className="text-white"><span className="font-bold">Category:</span> {post.category_name}</p>
                     </li>
                 ))}
             </ul>

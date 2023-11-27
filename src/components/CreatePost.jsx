@@ -57,16 +57,16 @@ export const CreatePost = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md border border-white/60">
       <header>
-        <h1>New Post</h1>
+        <div className="text-3xl font-bold text-white my-4">New Post</div>
       </header>
       <fieldset>
-        <h2>Title</h2>
         <div>
           <input
             name="title"
-            placeholder="post title"
+            placeholder="Title"
+            className="input-text w-[512px]"
             value={newPost.title}
             type="text"
             onChange={handleInputChange}
@@ -74,12 +74,12 @@ export const CreatePost = () => {
         </div>
       </fieldset>
       <fieldset>
-        <h2>Image URL</h2>
         <div>
           <input
             name="image_url"
-            placeholder="image URL"
+            placeholder="Image URL"
             value={newPost.image_url}
+            className="input-text w-[512px]"
             type="text"
             onChange={handleInputChange}
           />
@@ -87,24 +87,24 @@ export const CreatePost = () => {
       </fieldset>
 
       <fieldset>
-        <h2>Content</h2>
         <div>
           <textarea
             name="content"
-            placeholder="post content"
+            className="input-text w-[512px] h-[128px]"
+            placeholder="Article Content"
             value={newPost.content}
             onChange={handleInputChange}
           />
         </div>
       </fieldset>
       <fieldset>
-        <h2>Category</h2>
         <select
           name="category"
           onChange={handleInputChange}
+          className="rounded p-2 text-sm"
           value={newPost.category}
         >
-          <option value={0}>Please select a category</option>
+          <option value={0}>Category Select</option>
           {category.map((catobj) => {
             return (
               <option key={catobj.id} value={catobj.id}>
@@ -114,23 +114,21 @@ export const CreatePost = () => {
           })}
         </select>
       </fieldset>
-      <fieldset>
-        <label>
-          <strong>Tags</strong>
-        </label>
-        <br />
+      <fieldset className="flex flex-wrap gap-4">
         {tags.map((t) => (
-          <div key={`tags-${t.id}`}>
+          <div className="flex items-center" key={`tags-${t.id}`}>
             <input
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               type="checkbox"
               checked={chosenTags.has(t.id)}
               onChange={() => handleTagChosen(t)}
             />
-            {t.label}
+            <div className="ms-2 text-sm text-white">{t.label}</div>
+
           </div>
         ))}
       </fieldset>
-      <button type="submit">Publish</button>
+      <button type="submit" className="btn-edit mb-4">Publish</button>
     </form>
   );
 };
