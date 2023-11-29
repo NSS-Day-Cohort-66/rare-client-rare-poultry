@@ -40,6 +40,24 @@ export const Categories = () => {
     setNewCategory({ label: "" });
   };
 
+  const deleteCategory = async (event, id) => {
+    event.preventDefault();
+
+    await fetch(`http://localhost:8000/categories/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${
+          JSON.parse(localStorage.getItem("rare_token")).token
+        }`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const updatedCategories = await categoryService();
+    deleteModal.current.close();
+    setCategories(updatedCategories);
+  };
+
   const changeCategory = async (event, id) => {
     event.preventDefault();
     const finalValue = {
@@ -106,16 +124,28 @@ export const Categories = () => {
       </dialog>
       {/* Delete Modal Designated Below*/}
       <dialog
-        className="__delete-modal__ bg-red-400/90 p-10 font-bold"
+        className="__delete-modal__ bg-red-400/90 p-10 font-bold rounded border border-white"
         ref={deleteModal}
       >
-        <div>Delete Modal</div>
-        <button
-          className="btn-delete"
-          onClick={() => deleteModal.current.close()}
-        >
-          Close Modal
-        </button>
+        <div className="flex flex-col gap-4 items-center">
+          <div>Are you sure you want to Delete {editCategory.label}?</div>
+          <div className="space-x-4">
+            <button
+              className="btn-delete"
+              onClick={(event) => {
+                deleteCategory(event, editCategory.id);
+              }}
+            >
+              Yes
+            </button>
+            <button
+              className="btn-delete"
+              onClick={() => deleteModal.current.close()}
+            >
+              Close Modal
+            </button>
+          </div>
+        </div>
       </dialog>
       <div className="__categories-list-form-container__ flex h-[684px]">
         <div className="__categories-list__ flex flex-col flex-1 flex-wrap gap-2 bg-cyan-950/60 border border-white/40 items-center rounded-lg p-10">
@@ -137,7 +167,10 @@ export const Categories = () => {
                   </button>
                   <button
                     className="btn-delete"
-                    onClick={() => deleteModal.current.showModal()}
+                    onClick={() => {
+                      setEditCategory(category);
+                      deleteModal.current.showModal();
+                    }}
                   >
                     <img src={deleteButton} />
                   </button>
