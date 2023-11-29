@@ -116,7 +116,10 @@ export const PostDetails = () => {
         </button>
       </div>
       <button>
-        <Link to={`/posts/${post.id}/comments`}>Comments</Link>
+        <Link to={`/posts/${post.id}/addcomments`}> Add a Comment</Link>
+      </button>
+      <button>
+        <Link to={`/posts/${post.id}/comments`}>View Comments</Link>
       </button>
     </div>
   );
