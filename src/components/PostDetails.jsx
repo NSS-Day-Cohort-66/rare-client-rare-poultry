@@ -36,6 +36,14 @@ export const PostDetails = () => {
         <p className="text-gray-700 text-lg mb-2">{post.content}</p>
         <p className="text-gray-600">Published on: {post.publication_date}</p>
         <p className="text-gray-600">Author: {post.user.user.author_name}</p>
+        <button>
+          <strong>Tags</strong>
+        </button>
+        <div>
+          {post.tags.map((tagId) => (
+            <span key={tagId} className="tag">{`${tagId}, `}</span>
+          ))}
+        </div>
       </div>
       <button>
         <Link to={`/posts/${post.id}/comments`}>Comments</Link>
