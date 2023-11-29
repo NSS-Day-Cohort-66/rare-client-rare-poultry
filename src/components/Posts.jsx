@@ -44,10 +44,7 @@ export const Posts = () => {
             deleteModal.current.close()
 
         }
-
     }
-
-
 
 
     return (
