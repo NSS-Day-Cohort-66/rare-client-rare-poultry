@@ -142,7 +142,7 @@ export const Categories = () => {
               className="btn-delete"
               onClick={() => deleteModal.current.close()}
             >
-              Close Modal
+              Cancel
             </button>
           </div>
         </div>
