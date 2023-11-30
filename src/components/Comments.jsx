@@ -3,6 +3,7 @@ import { postServiceById } from "../services/postService";
 import { useParams } from "react-router-dom";
 import editButton from "../assets/edit.png";
 import deleteButton from "../assets/trash.png";
+// import { comment } from "postcss";
 
 export const Comments = () => {
   const [post, setPost] = useState([]);
@@ -23,10 +24,10 @@ export const Comments = () => {
     );
   }
 
-  const deleteComment = async (event, id) => {
+  const deleteComment = async (event, commentId, postId) => {
     event.preventDefault();
 
-    await fetch(`http://localhost:8000/comments/${id}`, {
+    await fetch(`http://localhost:8000/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Token ${
@@ -36,9 +37,9 @@ export const Comments = () => {
       },
     });
 
-    const updatedComment = await postServiceById();
+    const updatedPost = await postServiceById(postId);
     deleteModal.current.close();
-    setPost(updatedComment);
+    setPost(updatedPost);
   };
 
   const changeComment = async (event, id) => {
@@ -46,7 +47,7 @@ export const Comments = () => {
     const finalValue = {
       content: editComment.content,
       post: postId,
-      author: editComment.author.id
+      author: editComment.author.id,
     };
 
     await fetch(`http://localhost:8000/comments/${id}`, {
@@ -160,7 +161,7 @@ export const Comments = () => {
                   </button>
                 </div>
                 <div className="text-white text-lg mb-2">{obj.content}</div>
-                
+
                 <div className="text-gray-600">
                   - {obj.author.user.author_name}
                 </div>
