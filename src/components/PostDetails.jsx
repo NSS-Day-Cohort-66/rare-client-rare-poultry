@@ -38,7 +38,10 @@ export const PostDetails = () => {
         <p className="text-gray-600">Author: {post.user.user.author_name}</p>
       </div>
       <button>
-        <Link to={`/posts/${post.id}/comments`}>Comments</Link>
+        <Link to={`/posts/${post.id}/addcomments`}> Add a Comment</Link>
+      </button>
+      <button>
+        <Link to={`/posts/${post.id}/comments`}>View Comments</Link>
       </button>
     </div>
   );
