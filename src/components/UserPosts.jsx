@@ -43,7 +43,7 @@ export const UserPosts = () => {
 
         if (response.ok) {
             const updatedPosts = await postService();
-            setAllPosts(updatedPosts)
+            setUserPosts(updatedPosts)
         } else {
             console.error('Failed to delete post:', response)
         }
