@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { postService } from "../services/postService";
 import { Link } from "react-router-dom";
+import deleteButton from "../assets/trash.png"
 
 export const UserPosts = () => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
+  const [deletePost, setDeletePost] = useState(null)
+  const deleteModal = useRef()
 
   useEffect(() => {
     postService().then((obj) => {
@@ -22,8 +25,38 @@ export const UserPosts = () => {
     setUserPosts(filteredPosts);
   }, [posts]);
 
-  if (userPosts == []) {
-    return <div>No Posts to Show!</div>;
+
+  const handlePostDelete = async (id) => {
+    if (!id) {
+        console.error("No post ID available for deletion.")
+        return
+    }
+
+    try {
+        const response =  await fetch(`http://localhost:8000/posts/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Token ${JSON.parse(localStorage.getItem("rare_token")).token}`,
+                "Content-Type": "application/json",
+            }
+        })
+
+        if (response.ok) {
+            const updatedPosts = await postService();
+            setAllPosts(updatedPosts)
+        } else {
+            console.error('Failed to delete post:', response)
+        }
+    } catch (error) {
+        console.error('Error during deletion:', error)
+    } finally {
+        deleteModal.current.close()
+
+    }
+}
+
+  if (userPosts.length === 0) {
+    return <div className="__no-posts-item__ bg-cyan-500 py-4 px-6 text-cyan-950 text-xl font-bold mb-4 rounded-md flex flex-col">No Posts to Show!</div>;
   }
 
   return (
@@ -48,10 +81,22 @@ export const UserPosts = () => {
               </h2>
               <p className="text-white"><span className="font-bold">Author:</span> {post.user.user.author_name}</p>
               <p className="text-white"><span className="font-bold">Category:</span>{post.category_name}</p>
+              <div>
+                <button className="btn-delete" onClick={() => { setDeletePost(post.id); deleteModal.current.showModal(); }}>
+                <img src={deleteButton} />
+                  </button>
+              </div>
             </li>
           ))}
         </ul>
       </div>
-    </div>
+        <dialog className="__delete-modal__ bg-red-400/90 p-10 font-bold rounded border border-white" ref={deleteModal}>
+          <div>Are you sure you want to delete this post?</div>
+            <div className="__btn-container__ flex justify-around mt-6">
+                <button className="btn-edit px-6" onClick={() => handlePostDelete(deletePost)}>Ok</button>
+                <button className="btn-delete" onClick={() => deleteModal.current.close()}>Cancel</button>
+            </div>
+          </dialog>
+      </div>
   );
 };
