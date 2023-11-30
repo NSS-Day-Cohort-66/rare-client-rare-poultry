@@ -49,8 +49,12 @@ export const EditPost = () => {
             navigate(`/posts/${postId}`)
           };
 
+    const handleCancel = () => {
+        navigate("/posts")
+    }
+
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md border border-white/60">
+        <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md border">
             <header>
                 <div className="text-3xl font-bold text-white my-4">Edit Post</div>
             </header>
@@ -106,7 +110,10 @@ export const EditPost = () => {
                   })}
                 </select>
             </fieldset>
-            <button type="submit" className="btn-edit mb-4">Save Changes</button>
+            <div className="flex gap-2">
+            <button type="submit" className="btn-edit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Changes</button>
+            <button type="button" onClick={handleCancel} className="btn-cancel bg-red-500 text-white font-bold px-4 py-2 rounded hover:bg-red-600">Cancel</button>
+            </div>
         </form>
   );
 }

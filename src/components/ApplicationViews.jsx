@@ -13,6 +13,7 @@ import { UserDetails } from "./UserDetails";
 import { UserPosts } from "./UserPosts";
 import { CreatePost } from "./CreatePost";
 import { AddComments } from "./AddComments";
+import { EditPost } from "./EditPost";
 
 export const ApplicationViews = () => {
   return (
@@ -26,6 +27,7 @@ export const ApplicationViews = () => {
           <Route path="createpost" element={<CreatePost />} />
           <Route path="posts" element={<Posts />} />
           <Route path="posts/:postId" element={<PostDetails />} />
+          <Route path="edit-post/:postId" element={<EditPost />} />
           <Route path="categorymanager" element={<Categories />} />
           <Route path="tagmanager" element={<Tags />} />
           <Route path="posts/:postId/comments" element={<Comments />} />
