@@ -36,7 +36,7 @@ export const Comments = () => {
       },
     });
 
-    const updatedComment = await postServiceById();
+    const updatedComment = await postServiceById(postId);
     deleteModal.current.close();
     setPost(updatedComment);
   };
@@ -46,7 +46,7 @@ export const Comments = () => {
     const finalValue = {
       content: editComment.content,
       post: postId,
-      author: editComment.author.id
+      author: editComment.author.id,
     };
 
     await fetch(`http://localhost:8000/comments/${id}`, {
@@ -160,7 +160,7 @@ export const Comments = () => {
                   </button>
                 </div>
                 <div className="text-white text-lg mb-2">{obj.content}</div>
-                
+
                 <div className="text-gray-600">
                   - {obj.author.user.author_name}
                 </div>
