@@ -60,11 +60,13 @@ export const Posts = () => {
                             </h2>
                             <div className="text-white"><span className="font-bold">Author:</span> {post.user.user.author_name}</div>
                             <div className="text-white"><span className="font-bold">Category:</span> {post.category_name}</div>
-                            <div>
-                            <button className="btn-delete" onClick={() => { setDeletePost(post.id); deleteModal.current.showModal(); }}>
-                                <img src={deleteButton} />
-                            </button>
-                        </div>
+                            {post.is_owner && (
+                                <div>
+                                    <button className="btn-delete" onClick={() => { setDeletePost(post.id); deleteModal.current.showModal(); }}>
+                                    <img src={deleteButton} />
+                                    </button>
+                                </div>
+                            )}
                         </li>
                         ))}
                     </ul>
