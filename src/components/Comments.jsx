@@ -3,7 +3,6 @@ import { postServiceById } from "../services/postService";
 import { useParams } from "react-router-dom";
 import editButton from "../assets/edit.png";
 import deleteButton from "../assets/trash.png";
-// import { comment } from "postcss";
 
 export const Comments = () => {
   const [post, setPost] = useState([]);
@@ -24,10 +23,10 @@ export const Comments = () => {
     );
   }
 
-  const deleteComment = async (event, commentId, postId) => {
+  const deleteComment = async (event, id) => {
     event.preventDefault();
 
-    await fetch(`http://localhost:8000/comments/${commentId}`, {
+    await fetch(`http://localhost:8000/comments/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Token ${
@@ -37,9 +36,9 @@ export const Comments = () => {
       },
     });
 
-    const updatedPost = await postServiceById(postId);
+    const updatedComment = await postServiceById(postId);
     deleteModal.current.close();
-    setPost(updatedPost);
+    setPost(updatedComment);
   };
 
   const changeComment = async (event, id) => {
