@@ -108,7 +108,10 @@ export const PostDetails = () => {
         <div>Tags:</div>
         <div>
           {post.tags.map((tag) => (
-            <span key={tag.id} className="tag">{`${tag.label}, `}</span>
+            <span
+              key={`tags-${tag.id}`}
+              className="tag"
+            >{`${tag.label}, `}</span>
           ))}
         </div>
         <button className="btn-delete" onClick={handleTagsButtonClick}>
