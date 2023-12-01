@@ -1,13 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import { postService } from "../services/postService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import deleteButton from "../assets/trash.png"
+import editButton from "../assets/edit.png"
 
 export const UserPosts = () => {
   const [posts, setPosts] = useState([]);
   const [userPosts, setUserPosts] = useState([]);
   const [deletePost, setDeletePost] = useState(null)
   const deleteModal = useRef()
+  const navigate = useNavigate()
 
   useEffect(() => {
     postService().then((obj) => {
@@ -55,6 +57,10 @@ export const UserPosts = () => {
     }
 }
 
+  const handleEdit = (postId) => {
+    navigate(`/edit-post/${postId}`)
+  }
+
   if (userPosts.length === 0) {
     return <div className="__no-posts-item__ bg-cyan-500 py-4 px-6 text-cyan-950 text-xl font-bold mb-4 rounded-md flex flex-col">No Posts to Show!</div>;
   }
@@ -82,6 +88,9 @@ export const UserPosts = () => {
               <p className="text-white"><span className="font-bold">Author:</span> {post.user.user.author_name}</p>
               <p className="text-white"><span className="font-bold">Category:</span>{post.category_name}</p>
               <div>
+                <button className="btn-edit" onClick={() => handleEdit(post.id)}>
+                <img src={editButton} />
+                </button>
                 <button className="btn-delete" onClick={() => { setDeletePost(post.id); deleteModal.current.showModal(); }}>
                 <img src={deleteButton} />
                   </button>

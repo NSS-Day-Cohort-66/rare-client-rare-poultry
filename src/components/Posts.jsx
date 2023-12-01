@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { postService } from "../services/postService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import deleteButton from "../assets/trash.png";
+import editButton from "../assets/edit.png"
 
 export const Posts = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -14,6 +15,8 @@ export const Posts = () => {
       setAllPosts(postsArray);
     });
   }, []);
+    
+  const navigate = useNavigate()
 
   const handlePostDelete = async (id) => {
     if (!id) {
@@ -44,6 +47,11 @@ export const Posts = () => {
       deleteModal.current.close();
     }
   };
+
+  const handleEdit = (postId) => {
+    navigate(`/edit-post/${postId}`)
+  }
+
 
   return (
     <div className="__posts-container__ flex flex-col w-[98%]">
@@ -90,7 +98,10 @@ export const Posts = () => {
               </div>
             </div>
             {post.is_owner ? (
-              <div>
+              <div className="flex items-center">
+                <button className="btn-edit" onClick={() => handleEdit(post.id)}>
+                    <img src={editButton} />
+                </button>
                 <button
                   className="btn-delete w-[36px]"
                   onClick={() => {
@@ -98,7 +109,7 @@ export const Posts = () => {
                     deleteModal.current.showModal();
                   }}
                 >
-                  <img src={deleteButton} />
+                      <img src={deleteButton} />
                 </button>
               </div>
             ) : (

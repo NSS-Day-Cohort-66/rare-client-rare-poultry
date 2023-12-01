@@ -5,52 +5,98 @@ import { postServiceById } from "../services/postService"
 
 export const EditPost = () => {
     const [category, setCategory] = useState([])
+    const [chosenCategory, setChosenCategory] = useState('')
     const [editedPost, setEditedPost] = useState({
         title: "",
         image_url: "",
         content: "",
-        category: 0,
         tags: []
     })
 
     const { postId } = useParams()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        categoryService().then(setCategory)
 
-        if (postId) {
-            postServiceById(postId).then(postInfo => {
-                setEditedPost({
-                    title: postInfo.title,
-                    image_url: postInfo.image_url,
-                    content: postInfo.content,
-                    category: postInfo.category.id,
-                })
-            })
+    useEffect(() => {
+        const fetchCategories = async () => {
+         const categoriesData = await categoryService();
+         setCategory(categoriesData);
         }
+
+        fetchCategories()
     }, [postId])
+       
+    useEffect(() => {
+        const fetchPost = async () => {
+         if (postId) {
+           const postInfo = await postServiceById(postId);
+           setEditedPost({
+             title: postInfo.title,
+             image_url: postInfo.image_url,
+             content: postInfo.content,
+             user: postInfo.user.id,
+             approved: postInfo.approved
+           });
+           const matchedCategory = category.find(cat => cat.label === postInfo.category_name)
+           if (matchedCategory) {
+             setChosenCategory(matchedCategory.id);
+           }
+         }
+        }
+
+        if (category.length > 0) {
+            fetchPost()
+        }
+       }, [postId, category]);
+       
 
     const handleInputChange = (event) => {
-        setEditedPost({ ...editedPost, [event.target.name]: event.target.value })
+        if (event.target.name === 'category') {
+            setChosenCategory(event.target.value)
+        } else (
+            setEditedPost({ ...editedPost, [event.target.name]: event.target.value })
+        )
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        await fetch(`http://localhost:8000/posts/${postId}`, {
+        const postData = {
+            ...editedPost,
+            category: chosenCategory,
+            user: editedPost.user,
+            approved: editedPost.approved
+        }
+
+        console.log("Sending PUT Request with data:", postData)
+
+
+        try {
+            const response = await fetch(`http://localhost:8000/posts/${postId}`, {
             method: "PUT",
             headers: {
                 Authorization: `Token ${JSON.parse(localStorage.getItem("rare_token")).token}`,
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify(editedPost),
+              body: JSON.stringify(postData),
             });
-            navigate(`/posts/${postId}`)
-          };
+
+            if (response.ok) {
+                navigate(`/posts/${postId}`)
+            } else {
+                console.error('Failed to update post:', await response.text())
+            }
+        } catch (error) {
+            console.error('Error during PUT request:', error)
+        }
+    }
+
+    const handleCancel = () => {
+        navigate("/posts")
+    }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md border border-white/60">
+        <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4 w-9/12 bg-sky-700/80 px-6 rounded-md border">
             <header>
                 <div className="text-3xl font-bold text-white my-4">Edit Post</div>
             </header>
@@ -94,7 +140,7 @@ export const EditPost = () => {
                   name="category"
                   onChange={handleInputChange}
                   className="rounded p-2 text-sm"
-                  value={editedPost.category}
+                  value={chosenCategory}
                 >
                   <option value={0}>Category Select</option>
                   {category.map((catobj) => {
@@ -106,7 +152,10 @@ export const EditPost = () => {
                   })}
                 </select>
             </fieldset>
-            <button type="submit" className="btn-edit mb-4">Save Changes</button>
+            <div className="flex gap-2">
+            <button type="submit" className="btn-edit bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Changes</button>
+            <button type="button" onClick={handleCancel} className="btn-cancel bg-red-500 text-white font-bold px-4 py-2 rounded hover:bg-red-600">Cancel</button>
+            </div>
         </form>
   );
-}
+ }
