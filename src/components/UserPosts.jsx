@@ -58,7 +58,7 @@ export const UserPosts = () => {
 }
 
   const handleEdit = (postId) => {
-    navigate(`/edit-post/&{postId}`)
+    navigate(`/edit-post/${postId}`)
   }
 
   if (userPosts.length === 0) {
