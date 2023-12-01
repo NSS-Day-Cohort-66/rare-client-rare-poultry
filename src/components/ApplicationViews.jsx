@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Authorized } from "./Authorized";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
-import App from "../App";
 import { Categories } from "./Categories";
 import { Tags } from "./Tags";
 import { Posts } from "./Posts";
@@ -21,7 +20,7 @@ export const ApplicationViews = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route element={<Authorized />}>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<Posts />} />
           <Route path="myposts" element={<UserPosts />} />
           <Route path="createpost" element={<CreatePost />} />
           <Route path="posts" element={<Posts />} />
